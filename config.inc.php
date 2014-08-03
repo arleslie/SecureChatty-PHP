@@ -7,4 +7,6 @@ try {
 	die('Site is currently experecing problems.');
 }
 
+include 'functions/autoloader.php';
+
 session_start();

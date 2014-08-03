@@ -1,6 +1,6 @@
 <?php
 
-namespace messenger;
+namespace classes;
 
 class Encryption
 {

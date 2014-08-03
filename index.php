@@ -1,9 +1,9 @@
 <?php
 
+error_reporting(E_ALL);
+
 require('config.inc.php');
-require('classes/Controller.class.php');
-require('classes/Encryption.class.php');
 
-$controller = new messenger\Controller();
+$controller = new classes\Controller();
 
-echo $controller->getPage('loginForm');
+echo $controller->getPage('login');

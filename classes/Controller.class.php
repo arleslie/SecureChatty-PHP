@@ -1,11 +1,25 @@
 <?php
 
-namespace messenger;
+namespace classes;
 
 class Controller
 {
-	public function getPage($page)
+	public function getPage($page, $header = true)
 	{
-		return file_get_contents("pages/{$page}.php");
+		switch ($page)
+		{
+			case 'login':
+				$page = new \pages\Login();
+				break;
+		}
+
+		$output = $page->getOutput();
+
+		if ($header) {
+			$template = new \pages\Template();
+			$output = $template->getHeader() . $output . $template->getFooter();
+		}
+
+		return $output;
 	}
 }
