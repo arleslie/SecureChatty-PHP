@@ -2,7 +2,14 @@
 
 error_reporting(E_ALL);
 
-require('config.inc.php');
+try {
+	require('config.inc.php');
+} catch (Exception $e) {
+	die('Site is currently experecing problems.');
+}
+
+session_start();
+include 'functions/autoloader.php';
 
 $controller = new classes\Controller();
 $SecureChatty = array(
