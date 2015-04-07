@@ -6,7 +6,7 @@ require('config.inc.php');
 
 $controller = new classes\Controller();
 $SecureChatty = array(
-	'user' => new classes\User();
+	'user' => new classes\User()
 );
 
 if (!$SecureChatty['user']->isLoggedIn()) {
