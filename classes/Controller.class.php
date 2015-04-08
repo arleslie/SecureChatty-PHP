@@ -21,16 +21,22 @@ class Controller
 
 		switch ($page)
 		{
-			default:
+			case 'logout':
+				$_GET['logout'] = 1;
 			case 'login':
-				$page = new \pages\Login($this->db);
+				$page = new \pages\Login($this->db); // This file also opens the session to store login info.
+				break;
+
+			case 'home':
+			default:
+				$page = new \pages\Home();
 				break;
 		}
 
 		$output = $page->getOutput();
 
 		if ($header) {
-			$template = new \pages\Template();
+			$template = new \pages\Template($this->user);
 			$output = $template->getHeader() . $output . $template->getFooter();
 		}
 

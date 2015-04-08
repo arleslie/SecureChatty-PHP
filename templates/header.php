@@ -6,9 +6,24 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body>
-	<header>
+	<header class="navbar navbar-static-top">
 		<div class="container">
-			<h1>SecureChatty</h1>
+			<div class="navbar-header">
+				<a href="index.php" class="navbar-brand">SecureChatty</a>
+			</div>
+			<?php if ($loggedin): ?>
+			<nav>
+				<ul class="nav navbar-nav">
+					<li><a href="index.php?page=messages">Messages</a></li>
+					<li><a href="index.php?page=compose">Compose</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="index.php?page=settings">Settings</a></li>
+					<li><a href="index.php?page=logout">Logout</a></li>
+				</ul>
+			</nav>
+			<?php endif; ?>
 		</div>
 	</header>
 	<div class="container">
