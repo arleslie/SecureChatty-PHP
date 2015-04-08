@@ -2,15 +2,19 @@
 
 namespace pages;
 
-class Template
+class Template extends \classes\TplController
 {
+	public $filename;
+
 	public function getHeader()
 	{
-		return '';
+		$this->filename = 'header.php';
+		return $this->getOutput();
 	}
 
 	public function getFooter()
 	{
-		return '';
+		$this->filename = 'footer.php';
+		return $this->getOutput();
 	}
 }

@@ -2,23 +2,20 @@
 
 namespace pages;
 
-class Login
+class Login extends \classes\TplController
 {
 	private $db;
+	public $filename;
 
 	public function __construct()
 	{
 		global $db;
 		$this->db = $db;
+		$this->filename = 'loginForm.php';
 
 		if (empty($_SESSION['id']) && !empty($_POST['username']) && !empty($_POST['password'])) {
 			$this->checkLogin($_POST['username'], $_POST['password']);
 		}
-	}
-
-	public function getOutput()
-	{
-		return include('templates/loginForm.php');
 	}
 
 	private function checkLogin($username, $password)
