@@ -2,22 +2,10 @@
 
 error_reporting(E_ALL);
 
-try {
-	require('config.inc.php');
-} catch (Exception $e) {
-	die('Site is currently experecing problems.');
-}
-
 session_start();
 include 'functions/autoloader.php';
+$controller = new classes\Controller(); // The controller will handle the config info and manage DB access & Session Information.
+session_write_close(); // This way the user can have multiple requests going on at the same time.
 
-$controller = new classes\Controller();
-$SecureChatty = array(
-	'user' => new classes\User()
-);
-
-if (!$SecureChatty['user']->isLoggedIn()) {
-	echo $controller->getPage('login');
-} else {
-	echo $controller->getPage('home');
-}
+// The controller will override the page if the user isn't logged in.
+echo $controller->getPage('home');
