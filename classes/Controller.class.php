@@ -23,7 +23,7 @@ class Controller
 		{
 			default:
 			case 'login':
-				$page = new \pages\Login();
+				$page = new \pages\Login($this->db);
 				break;
 		}
 
