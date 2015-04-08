@@ -13,14 +13,15 @@ class Controller
 		$this->user = new User(); // Grab the session information
 	}
 
-	public function getPage($requested, $header = true)
+	public function getPage($page, $header = true)
 	{
 		if (!$this->user->isLoggedIn()) {
-			$requested = 'login';
+			$page = 'login';
 		}
 
-		switch ($requested)
+		switch ($page)
 		{
+			default:
 			case 'login':
 				$page = new \pages\Login();
 				break;
