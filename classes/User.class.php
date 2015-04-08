@@ -13,12 +13,14 @@ class User {
 		$this->db = $db;
 
 		if ($id === false) {
+			session_start();
 			$this->loggedin = !empty($_SESSION['id']);
 
 			if ($this->loggedin) {
 				$this->id = $_SESSION['id'];
 				$this->username = $_SESSION['username'];
 			}
+			session_write_close();
 		}
 	}
 
