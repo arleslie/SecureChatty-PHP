@@ -6,17 +6,17 @@ class Config
 {
 	private static $loadedConfig = array();
 
-	public function get($item)
+	public static function get($item)
 	{
-		if (empty($loadedConfig)) {
+		if (empty(self::$loadedConfig)) {
 			self::loadConfig();
 		}
 
-		return $loadedConfig[$item];
+		return self::$loadedConfig[$item];
 	}
 
 	private static function loadConfig()
 	{
-		self::$loadedConfig = parse_ini_file('../config.ini', true);
+		self::$loadedConfig = parse_ini_file('config.ini', true);
 	}
 }
