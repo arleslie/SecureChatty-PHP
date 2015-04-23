@@ -3,15 +3,12 @@
 namespace classes;
 
 class User {
-	private $db;
 	private $id;
 	private $username;
 	private $loggedin;
 
 	public function __construct($id = false)
-	{	global $db;
-		$this->db = $db;
-
+	{
 		if ($id === false) {
 			session_start();
 			$this->loggedin = !empty($_SESSION['id']);
@@ -22,6 +19,16 @@ class User {
 			}
 			session_write_close();
 		}
+	}
+
+	public function getId()
+	{
+		return intval($this->id);
+	}
+
+	public function getUsername()
+	{
+		return $this->username;
 	}
 
 	public function isLoggedin()
