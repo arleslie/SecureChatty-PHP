@@ -4,23 +4,12 @@ namespace classes;
 
 class DB extends \PDO
 {
-	private $dbHost;
-	private $dbName;
-	private $dbUser;
-	private $dbPass;
-	protected $connection = null;
-
 	public function __construct()
 	{
-		include('config.inc.php');
-
-		$this->dbHost = $dbHost;
-		$this->dbName = $dbName;
-		$this->dbUser = $dbUser;
-		$this->dbPass = $dbPass;
+		$details = Config::get('Database');
 
 		set_exception_handler(array(__CLASS__, 'error_handler'));
-		parent::__construct("mysql:host={$this->dbHost};dbname={$this->dbName}", $this->dbUser, $this->dbPass);
+		parent::__construct("mysql:host={$details['host']};dbname={$details['name']}", $details['user'], $details['password']);
 		restore_exception_handler();
 	}
 
