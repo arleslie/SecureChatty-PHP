@@ -9,6 +9,8 @@ class Login extends \classes\TplController
 
 	public function __construct($db)
 	{
+		parent::__construct();
+
 		$this->db = $db;
 		$this->filename = 'loginForm.php';
 
@@ -21,6 +23,11 @@ class Login extends \classes\TplController
 			session_destroy();
 			header('Location: index.php');
 			die();
+		}
+
+		$this->variables['tab'] = 'login';
+		if (!empty($_GET['tab']) && $_GET['tab'] == 'register') {
+			$this->variables['tab'] = 'register';
 		}
 	}
 
