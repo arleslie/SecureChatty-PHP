@@ -5,6 +5,7 @@ namespace classes;
 class TplController
 {
 	private static $theme = 'default';
+	protected $variables = array();
 
 	public function __construct()
 	{
@@ -24,12 +25,10 @@ class TplController
 		}
 	}
 
-	public function getOutput($variables = array())
+	public function getOutput()
 	{
-		if (!empty($variables)) {
-			foreach ($variables as $k => $v) {
-				$$k = $v;
-			}
+		foreach ($this->variables as $k => $v) {
+			$$k = $v;
 		}
 
 		$theme = self::$theme;

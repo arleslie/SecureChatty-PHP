@@ -17,9 +17,8 @@ class Template extends \classes\TplController
 	{
 		$this->filename = 'header.php';
 
-		return $this->getOutput(array(
-			'loggedin' => $this->user->isLoggedin()
-		));
+		$this->variables['loggedin'] = $this->user->isLoggedin();
+		return $this->getOutput();
 	}
 
 	public function getFooter()
