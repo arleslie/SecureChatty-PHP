@@ -8,6 +8,7 @@ class Home extends \classes\TplController
 
 	public function __construct()
 	{
+		parent::__construct();
 		$messages = new \classes\Messages();
 		$variables['unreadMessages'] = $messages->getUnread();
 	}

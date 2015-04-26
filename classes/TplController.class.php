@@ -7,6 +7,7 @@ class TplController
 	private static $theme = 'default';
 	protected $variables = array();
 
+	// @todo: have the theme options automatically called without parent::__construct
 	public function __construct()
 	{
 		if (!empty($_GET['theme'])) {

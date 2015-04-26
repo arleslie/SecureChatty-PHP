@@ -9,6 +9,7 @@ class Template extends \classes\TplController
 
 	public function __construct($user)
 	{
+		parent::__construct();
 		$this->user = $user;
 	}
 
