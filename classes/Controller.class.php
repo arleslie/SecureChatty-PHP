@@ -26,7 +26,9 @@ class Controller
 			case 'login':
 				$page = new \pages\Login($this->db); // This file also opens the session to store login info.
 				break;
-
+			case 'compose':
+				$page = new \pages\Compose();
+				break;
 			case 'home':
 			default:
 				$page = new \pages\Home();
