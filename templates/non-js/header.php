@@ -5,10 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<noscript>
-		<meta http-equiv="refresh" content="1;URL=index.php?theme=non-js">
-	</noscript>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<header class="navbar navbar-static-top">
@@ -32,13 +29,3 @@
 		</div>
 	</header>
 	<div class="container">
-		<noscript>
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					It appears you do not have JavaScript enabled.
-				</div>
-				<div class="panel-body">
-					<a href="index.php?theme=non-js">Click Here to switch to our non-javascript site.</a>
-				</div>
-			</div>
-		</noscript>
