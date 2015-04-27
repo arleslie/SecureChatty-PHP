@@ -14,8 +14,14 @@ class Login extends \classes\TplController
 		$this->db = $db;
 		$this->filename = 'loginForm.php';
 
-		if (empty($_SESSION['id']) && !empty($_POST['username']) && !empty($_POST['password'])) {
-			$this->checkLogin($_POST['username'], $_POST['password']);
+		$registerTab = !empty($_GET['tab']) && $_GET['tab'] == 'register';
+		if (empty($_SESSION['id']) && $registerTab && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['password2'])) {
+			$this->register($_POST['username'], $_POST['password'], $_POST['password2']);
+		}
+
+		$signinTab = empty($_GET['tab']) || $_GET['tab'] == 'signin';
+		if (empty($_SESSION['id']) && $signinTab && !empty($_POST['username']) && !empty($_POST['password'])) {
+			$this->checkLogin($_POST['signinUsername'], $_POST['signinPassword']);
 		}
 
 		if (!empty($_GET['logout'])) {
@@ -26,7 +32,7 @@ class Login extends \classes\TplController
 		}
 
 		$this->variables['tab'] = 'login';
-		if (!empty($_GET['tab']) && $_GET['tab'] == 'register') {
+		if ($registerTab) {
 			$this->variables['tab'] = 'register';
 		}
 	}
@@ -55,4 +61,28 @@ class Login extends \classes\TplController
 			die();
 		}
 	}
+
+	private function register($username, $password, $password2)
+	{
+		$userCheck = new \classes\ajax\Registration(array('checkUsername' => $username));
+		if ($userCheck->getReturn()['checkUsername'] !== 1) {
+			$this->variables['errors']['registration'] = "Invalid Username.";
+			return false;
+		}
+
+		if ($password !== $password2) {
+			$this->variables['errors']['registration'] = "Passwords do not match.";
+			return;
+		}
+
+		$register = $this->db->prepare(
+			"INSERT INTO users (username, password)
+			 VALUES (:username, :password)"
+		);
+
+		$register->execute(array(':username' => $username, ':password' => hash('sha256', $password. md5($username))));
+
+		$this->checkLogin($username, $password);
+	}
+
 }

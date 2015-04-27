@@ -12,7 +12,7 @@
 	<div class="tab-content">
 		<?php if ($tab == 'login'): ?>
 			<div class="tab-pane active panel-body" id="login">
-				<form method="POST" action="index.php">
+				<form method="POST" action="index.php?tab=login">
 					<div class="alert alert-info">
 						<b>Note:</b> For added security, we do not mark if the username or password combination is incorrect or locked out.
 					</div>
@@ -31,13 +31,18 @@
 		<?php endif; ?>
 		<?php if ($tab == 'register'): ?>
 			<div class="tab-pane active panel-body" id="register">
-				<form method="POST" action="index.php">
+				<form method="POST" action="index.php?tab=register">
 					<div class="alert alert-warning">
 						<b>Warning:</b> Do not forget your password, there is no way to recover it.
 					</div>
+
+					<?php if (!empty($errors['registration'])): ?>
+						<div class="alert alert-danger"><?=$errors['registration']?></div>
+					<?php endif; ?>
+
 					<div class="form-group">
 						<label for="username">Username:</label>
-						<input type="text" name="username" id="username" class="form-control">
+						<input type="text" name="username" id="username" class="form-control" placeholder="The follow characters are forbidden: &comma; &semi; &commat; &quot; &apos; &percnt; &amp; &ast;">
 					</div>
 					<div class="form-group">
 						<label for="password">Password:</label>
