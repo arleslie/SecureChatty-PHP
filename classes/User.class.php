@@ -24,6 +24,25 @@ class User {
 		}
 	}
 
+	public static function getUserByUsername($username)
+	{
+		$db = new DB();
+		$user = $db->prepare(
+			"SELECT id
+			 FROM users
+			 WHERE username = :username"
+		);
+
+		$user->execute(array(':username' => $username));
+
+		if ($user->rowCount() !== 0) {
+			$results = $user->fetch(\PDO::FETCH_ASSOC);
+			return new User($results['id']);
+		} else {
+			return false;
+		}
+	}
+
 	public function getId()
 	{
 		return intval($this->id);
