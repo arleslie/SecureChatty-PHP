@@ -44,4 +44,18 @@ class Controller
 
 		return $output;
 	}
+
+	public function getAjax($requests)
+	{
+		$returns = array();
+		foreach ($requests as $class => $request) {
+			if (class_exists("\\classes\\ajax\\{$class}", true)) {
+				$class2 = "\\classes\\ajax\\$class";
+				$abcd = new $class2($request);
+				$returns[$class] = $abcd->getReturn();
+			}
+		}
+
+		return json_encode($returns);
+	}
 }

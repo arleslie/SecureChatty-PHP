@@ -5,6 +5,11 @@ error_reporting(E_ALL);
 include 'functions/autoloader.php';
 $controller = new classes\Controller(); // The controller will handle the config info and manage DB access & Session Information.
 
+if (!empty($_REQUEST['ajax'])) {
+	echo $controller->getAjax($_REQUEST['ajax']);
+	die;
+}
+
 // I hate notices so handle undefined variable.
 if (empty($_GET['page'])) {
 	$_GET['page'] = 'home';
