@@ -15,10 +15,6 @@ class Registration extends Ajax
 
 	private function checkUsername($username)
 	{
-		if (\classes\User::getUserByUsername($username) !== false) {
-			return 0;
-		}
-
 		$badCharacters = array(
 			',',
 			';',
@@ -34,6 +30,10 @@ class Registration extends Ajax
 			if (stripos($username, $character) !== false) {
 				return 0;
 			}
+		}
+
+		if (\classes\User::getUserByUsername($username) !== false) {
+			return 0;
 		}
 
 		return 1;
