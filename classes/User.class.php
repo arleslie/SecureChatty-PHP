@@ -6,6 +6,8 @@ class User {
 	private $id;
 	private $username;
 	private $loggedin;
+	private $publickey;
+	private $privatekey;
 	private static $session;
 
 	public function __construct($id = false)
@@ -15,13 +17,27 @@ class User {
 			$this->loggedin = !empty($_SESSION['id']);
 
 			if ($this->loggedin) {
-				$this->id = $_SESSION['id'];
-				$this->username = $_SESSION['username'];
+				$this->id = $id = $_SESSION['id'];
 			}
 
 			self::$session = $_SESSION;
 			session_write_close();
 		}
+
+		$db = new DB();
+		$user = $db->prepare(
+			"SELECT id, username, publickey, privatekey
+			 FROM users
+			 WHERE id = :id"
+		);
+
+		$user->execute(array(':id' => $id));
+		$user = $user->fetch(\PDO::FETCH_ASSOC);
+
+		$this->id = $user['id'];
+		$this->username = $user['username'];
+		$this->publickey = $user['publickey'];
+		$this->privatekey = $user['privatekey'];
 	}
 
 	public static function getUserByUsername($username)
@@ -56,6 +72,16 @@ class User {
 	public function isLoggedin()
 	{
 		return $this->loggedin;
+	}
+
+	public function getPublickey()
+	{
+		return $this->publickey;
+	}
+
+	public function getPrivatekey()
+	{
+		return $this->privatekey;
 	}
 
 	public static function getSession($variable)

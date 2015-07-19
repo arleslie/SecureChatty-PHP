@@ -47,7 +47,7 @@ class Login extends \classes\TplController
 
 		$check->execute(array(
 			':username' => $username,
-			':password' => hash('sha256', $password . md5($username))
+			':password' => hash('sha512', md5($username) . $password)
 		));
 
 		$results = $check->fetch(\PDO::FETCH_ASSOC);
@@ -55,7 +55,7 @@ class Login extends \classes\TplController
 		if (!empty($results['id'])) {
 			session_start();
 			$_SESSION['id'] = $results['id'];
-			$_SESSION['key'] = hash('sha512', hash('sha256', $password . md5($username)));
+			$_SESSION['key'] = hash('sha512', hash('sha256', $password . md5($username)). $password);
 			$_SESSION['username'] = $results['username'];
 			header('Location: index.php');
 			die();
@@ -80,7 +80,9 @@ class Login extends \classes\TplController
 			 VALUES (:username, :password)"
 		);
 
-		$register->execute(array(':username' => $username, ':password' => hash('sha256', $password. md5($username))));
+		$register->execute(array(':username' => $username, ':password' => hash('sha512', md5($username) . $password)));
+
+		\classes\Encryption::createPGPKey($username, hash('sha512', hash('sha256', $password . md5($username)). $password));
 
 		$this->checkLogin($username, $password);
 	}
