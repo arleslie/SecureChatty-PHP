@@ -4,12 +4,6 @@ namespace classes;
 
 class Encryption
 {
-
-	public function __construct()
-	{
-
-	}
-
 	public static function createPGPKey($username, $password)
 	{
 
@@ -74,22 +68,20 @@ class Encryption
 		return true;
 	}
 
-	public function encrypt($string, $id)
+	public static function encrypt($string, $user)
 	{
-		$user = new User($id);
-
-		$gpg = new gnupg();
+		$gpg = new \gnupg();
 		$gpg->addencryptkey($user->getPublickey);
 		$encryptedString = $gpg->encrypt($string);
 
 		return $encryptedString;
 	}
 
-	public function decrypt($string)
+	public static function decrypt($string)
 	{
 		$user = new User();
 
-		$gpg = new gnupg();
+		$gpg = new \gnupg();
 		$gpg->adddecryptkey($user->getPrivatekey());
 		$decryptedString = $gpg->decrypt($string);
 
