@@ -3,7 +3,7 @@
 		Compose
 	</div>
 	<div class="panel-body">
-		<form>
+		<form method="POST" action="index.php?page=messages">
 			<div class="form-group">
 				<label for="to">To</label>
 				<input type="text" class="form-control" name="to" id="to" placeholder="Seperate by semi-colons to make a group conversation.">
