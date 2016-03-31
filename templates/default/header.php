@@ -20,12 +20,12 @@
 			<?php if ($loggedin): ?>
 			<nav>
 				<ul class="nav navbar-nav">
-					<li><a href="index.php?page=messages">Messages</a></li>
-					<li><a href="index.php?page=compose">Compose</a></li>
+					<li class="<?=$active['messages']?>"><a href="index.php?page=messages">Messages</a></li>
+					<li class="<?=$active['compose']?>"><a href="index.php?page=compose">Compose</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="index.php?page=settings">Settings</a></li>
+					<li class="<?=$active['settings']?>"><a href="index.php?page=settings">Settings</a></li>
 					<li><a href="index.php?page=logout">Logout</a></li>
 				</ul>
 			</nav>
