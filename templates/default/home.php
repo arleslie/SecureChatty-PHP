@@ -3,6 +3,22 @@
 		Unread Messages
 	</div>
 	<div class="panel-body">
+		<?php if (!empty($alerts['success'])): ?>
+			<div class="alert alert-success">
+				<?php foreach ($alerts['success'] as $alert): ?>
+					<?=$alert?><br>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
+
+		<?php if (!empty($alerts['error'])): ?>
+			<div class="alert alert-danger">
+				<?php foreach ($alerts['error'] as $alert): ?>
+					<?=$alert?><br>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
+
 		<?php if (!empty($unreadMessages)): ?>
 			<ul>
 				<?php foreach($unreadMessages as $message): ?>
