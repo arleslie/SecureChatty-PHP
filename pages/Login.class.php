@@ -19,9 +19,9 @@ class Login extends \classes\TplController
 			$this->register($_POST['username'], $_POST['password'], $_POST['password2']);
 		}
 
-		$signinTab = empty($_GET['tab']) || $_GET['tab'] == 'signin';
-		if (empty($_SESSION['id']) && $signinTab && !empty($_POST['username']) && !empty($_POST['password'])) {
-			$this->checkLogin($_POST['signinUsername'], $_POST['signinPassword']);
+		$signinTab = empty($_GET['tab']) || $_GET['tab'] == 'login';
+		if ($signinTab && !empty($_POST['username']) && !empty($_POST['password'])) {
+			$this->checkLogin($_POST['username'], $_POST['password']);
 		}
 
 		if (!empty($_GET['logout'])) {
